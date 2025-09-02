@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kube Dashboard</title>
+</head>
+<body>
+    <h2>Dashboard</h2>
+    <nav>
+        <a href="pods.html">Pods</a>
+        <a href="jobs.html">Jobs</a>
+        <a href="logs.html">Logs</a>
+        <a href="index.html" onclick="logout()">Logout</a>
+    </nav>
+
+    <h2>Pods</h2>
+    <table id="pods-table">
+        <thead><tr><th>Name</th><th>Namespace</th><th>Status</th></tr></thead>
+        <tbody></tbody>
+    </table>
+
+    <h2>Jobs</h2>
+    <table id="jobs-table">
+        <thead><tr><th>Name</th><th>Namespace</th><th>Completions</th><th>Status</th></tr></thead>
+        <tbody></tbody>
+    </table>
+
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

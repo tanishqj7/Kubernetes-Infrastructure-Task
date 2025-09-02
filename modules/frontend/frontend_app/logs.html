@@ -1,0 +1,82 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>Logs</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h1>Logs</h1>
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="pods.html">Pods</a>
+    <a href="jobs.html">Jobs</a>
+    <a href="logs.html">Logs</a>
+    <button onclick="logout()">Logout</button>
+  </nav>
+
+  <form id="logForm">
+    <label>Namespace</label>
+    <input id="log-ns" value="default" />
+    <label>Pod Name</label>
+    <input id="log-pod" placeholder="my-pod" required />
+    <button type="button" onclick="getLogs()">Fetch Logs</button>
+  </form>
+
+  <h2>Logs Output</h2>
+  <pre id="log-output"></pre>
+
+  <script src="js/api.js"></script>
+  <script src="js/logs.js"></script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pod Logs</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="pods.html">Pods</a>
+    <a href="jobs.html">Jobs</a>
+    <a href="logs.html">Logs</a>
+    <button onclick="logout()">Logout</button>
+  </nav>
+
+  <main>
+    <h1>Pod Logs</h1>
+    
+    <div class="logs-section">
+      <h2>Available Pods</h2>
+      <div id="pods-list"></div>
+      
+    <h1>Pod Logs</h1>
+    
+    <form id="logForm">
+      <label>Namespace</label>
+      <input id="log-ns" value="backend" required />
+      
+      <label>Pod Name</label>
+      <input id="log-pod" placeholder="Enter pod name" required />
+      
+      <button type="button" onclick="getLogs()">Get Logs</button>
+    </form>
+
+    <h2>Logs Output</h2>
+    <pre id="log-output"></pre>
+
+    <!-- <h2>Logs Output</h2>
+    <div id="log-status" class="status"></div>
+    <pre id="log-output" style="background: #f5f5f5; padding: 10px; border: 1px solid #ddd; max-height: 400px; overflow-y: auto;"></pre> -->
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/logs.js"></script>
+  <script src="js/pods.js"></script>
+
+</body>
+</html>

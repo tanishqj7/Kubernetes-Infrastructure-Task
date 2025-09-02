@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>   
+   
+   <h1>Register</h1>
+    <form id="registerform" onsubmit="return false;">
+        <input type="text" name="reg-username" id="reg-username" placeholder="Username" required><br>
+        <input type="password" name="reg-password" id="reg-password" placeholder="Password" required><br>
+        <select id="reg-role" name="reg-role">
+            <option>NamespaceManager</option>
+            <option>Viewer</option>
+        </select>        
+        <input type="text" name="reg-namespace" id="reg-namespace" value="default"><br>
+        <button type="submit" onclick="register(event)" class="btn primary">Register</button>
+    </form>
+  <p>Have an account? <a href="index.html">login</a></p>
+  <div id="register-status" class="status"></div>
+
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Pod</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="pods.html">Pods</a>
+    <a href="jobs.html">Jobs</a>
+    <a href="logs.html">Logs</a>
+  </nav>
+  
+  <main>
+    <h1>Create Pod</h1>
+    
+    <form id="podForm">
+      <label>Namespace</label>
+      <input id="pod-ns" value="backend" />
+
+      <label>Pod Name</label>
+      <input id="pod-name" placeholder="my-pod" required />
+
+      <label>Image</label>
+      <input id="pod-image" placeholder="nginx:latest" required />
+
+      <label>Restart Policy</label>
+      <select id="pod-restart">
+        <option>Always</option>
+        <option>OnFailure</option>
+        <option>Never</option>
+      </select>
+
+      <label>Command</label>
+      <input id="pod-cmd" placeholder="/bin/sh" />
+
+      <label>Args (space-separated)</label>
+      <input id="pod-args" placeholder="-c 'sleep 3600'" />
+
+      <label>Environment Variables (NAME=VALUE per line)</label>
+      <textarea id="pod-env" rows="3" placeholder="PORT=8080&#10;NODE_ENV=production"></textarea>
+
+      <label>Labels (key=value per line)</label>
+      <textarea id="pod-labels" rows="3" placeholder="app=myapp&#10;version=v1"></textarea>
+
+      <div class="row-flex">
+        <button type="button" id="preview-pod">Preview JSON</button>
+        <button type="submit" class="primary">Create Pod</button>
+      </div>
+      
+      <pre id="pod-json" class="help"></pre>
+      <div id="pod-status" class="status"></div>
+    </form>
+
+    <h2>Existing Pods</h2>
+    <div id="pods-list"></div>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/pods.js"></script>
+</body>
+</html>

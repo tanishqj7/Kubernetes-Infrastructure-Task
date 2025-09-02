@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Job</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="pods.html">Pods</a>
+    <a href="jobs.html">Jobs</a>
+    <a href="logs.html">Logs</a>
+  </nav>
+  
+  <main>
+    <h1>Create Job</h1>
+    
+    <form id="jobForm">
+      <label>Namespace</label>
+      <input id="job-ns" value="backend" />
+
+      <label>Job Name</label>
+      <input id="job-name" placeholder="my-job" required />
+
+      <label>Image</label>
+      <input id="job-image" placeholder="busybox:latest" required />
+
+      <label>Completions</label>
+      <input id="job-completions" type="number" value="1" />
+
+      <label>Parallelism</label>
+      <input id="job-parallelism" type="number" value="1" />
+
+      <label>Backoff Limit</label>
+      <input id="job-backoff" type="number" value="3" />
+
+      <label>Command</label>
+      <input id="job-cmd" placeholder="sh" />
+
+      <label>Args (space-separated)</label>
+      <input id="job-args" placeholder="-c 'echo Hello && sleep 60'" />
+
+      <label>Environment Variables (NAME=VALUE per line)</label>
+      <textarea id="job-env" rows="3" placeholder="MY_VAR=value1&#10;ANOTHER_VAR=value2"></textarea>
+
+      <label>Labels (key=value per line)</label>
+      <textarea id="job-labels" rows="3" placeholder="app=myjob&#10;version=v1"></textarea>
+
+      <div class="row-flex">
+        <button type="button" id="preview-job">Preview JSON</button>
+        <button type="submit" class="primary">Create Job</button>
+      </div>
+      
+      <pre id="job-json" class="help"></pre>
+      <div id="job-status" class="status"></div>
+    </form>
+
+    <h2>Existing Jobs</h2>
+    <div id="jobs-list"></div>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/jobs.js"></script>
+</body>
+</html>
+
+
+
