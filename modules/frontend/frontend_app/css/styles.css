@@ -22,3 +22,6 @@ pre { background: #f0f0f0; padding: 10px; border-radius: 6px; overflow-x: auto; 
 .err { color: red; }
 table { width: 100%; margin-bottom: 10px; border-collapse: collapse; background: #fff; }
 table th, table td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+#login-form {
+  background-color: #007bff;
+}

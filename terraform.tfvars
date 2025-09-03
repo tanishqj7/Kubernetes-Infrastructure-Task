@@ -23,7 +23,7 @@ database_url = "postgresql://postgres:postgres@postgres:5432/kube"
 
 #frontend
 frontend_name     = "frontend"
-frontend_image    = "tanishqjaiswal/infra-frontend:v9"
+frontend_image    = "tanishqjaiswal/infra-frontend:v10"
 frontend_replicas = 1
 
 
