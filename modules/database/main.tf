@@ -305,7 +305,7 @@ resource "kubernetes_stateful_set" "postgres" {
 
     volume_claim_template {
       metadata {
-        name = "${var.postgres_name}-storage"
+        name = "${var.postgres_name}-pvc"
       }
 
       spec {
@@ -336,7 +336,7 @@ resource "kubernetes_service" "postgres" {
     port {
       port        = 5432
       target_port = 5432
-      protocol    = "TCP"
+      # protocol    = "TCP"
     }
   }
 }
