@@ -183,6 +183,9 @@ resource "kubernetes_config_map" "postgres_config" {
     POSTGRES_DB   = var.db_name
     POSTGRES_USER = var.db_user
     PGDATA        = var.pgdata
+    # DATABASE_URL = var.db_url
+        # DATABASE_URL  = "postgresql://${var.db_user}:${var.db_password}@${var.postgres_name}:5432/${var.db_name}"
+
   }
 }
 
@@ -196,13 +199,13 @@ resource "kubernetes_secret" "postgres_secret" {
   }
 
   data = {
-    POSTGRES_PASSWORD = base64encode(var.db_password)
+    POSTGRES_PASSWORD = var.db_password
   }
 }
 
-resource "kubernetes_config_map" "postgres_initdb" {
+resource "kubernetes_config_map" "postgres_init" {
   metadata {
-    name      = "${var.postgres_name}-initdb"
+    name      = "${var.postgres_name}-init"
     namespace = var.namespace
   }
 
@@ -284,7 +287,7 @@ resource "kubernetes_stateful_set" "postgres" {
           }
 
           volume_mount {
-            name       = "${var.postgres_name}-storage"
+            name       = "${var.postgres_name}-pvc"
             mount_path = "/var/lib/postgresql/data"
           }
 
@@ -297,7 +300,7 @@ resource "kubernetes_stateful_set" "postgres" {
         volume {
           name = "postgres-init"
           config_map {
-            name = kubernetes_config_map.postgres_initdb.metadata[0].name
+            name = kubernetes_config_map.postgres_init.metadata[0].name
           }
         }
       }

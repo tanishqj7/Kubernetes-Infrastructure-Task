@@ -17,6 +17,6 @@ variable "flask_port" {
   type = number
 }
 
-variable "app_config_name" {
+variable "database_url" {
   type = string
 }

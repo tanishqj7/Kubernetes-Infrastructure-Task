@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS role (
         username VARCHAR(120) UNIQUE NOT NULL,
         password VARCHAR(255) NOT NULL,
         role_id INT REFERENCES role(id) ON DELETE CASCADE,
-        namespace VARCHAR(120) DEFAULT 'backend',
+        namespace VARCHAR(120) DEFAULT 'myapp',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS role (
         'admin',
         'admin',
         (SELECT id FROM role WHERE name = 'AdminManager'),
-        'platform'
+        'default'
     )
     ON CONFLICT (username) DO NOTHING;
 

@@ -4,8 +4,8 @@ resource "kubernetes_namespace" "app_ns" {
   }
 }
 
-module "postgres" {
-  source = "./modules/postgres"
+module "database" {
+  source = "./modules/database"
 
   namespace         = var.namespace
   postgres_name     = var.postgres_name
@@ -27,7 +27,9 @@ module "backend" {
   backend_image     = var.backend_image
   backend_replicas  = var.backend_replicas
   flask_port        = var.flask_port
-  app_config_name   = var.app_config_name
+#   app_config_name   = var.app_config_name
+#   backend_secret_name = var.backend_secret_name
+  database_url = var.database_url
 }
 
 module "frontend" {
@@ -43,8 +45,8 @@ module "ingress" {
   source = "./modules/ingress"
 
   namespace     = var.namespace
-  backend_name  = module.backend.backend_service_name
-  frontend_name = module.frontend.frontend_service_name
+  backend_name  = var.backend_name
+  frontend_name = var.frontend_name
   flask_port    = var.flask_port
 }
 

@@ -1,4 +1,4 @@
-resource "kubernetes_ingress" "nginx_ingress" {
+resource "kubernetes_ingress_v1" "nginx_ingress" {
     metadata {
       name = "nginx-ingress"
       namespace = var.namespace
@@ -17,28 +17,38 @@ resource "kubernetes_ingress" "nginx_ingress" {
         http {
           path {
             path = "/auth"
-            # path_type = "Prefix"
+            path_type = "Prefix"
             backend {
-                service_name =  var.backend_name
-                service_port =  var.flask_port
-              
+              service {
+                name = var.backend_name
+                port {
+                    number = var.flask_port
+                }
+              }
             }
           }
           path {
             path = "/api"
-            # path_type = "Prefix"
+            path_type = "Prefix"
             backend {
-                service_name  = var.backend_name
-                service_port =  var.flask_port
+              service {
+                name = var.backend_name
+                port {
+                    number = var.flask_port
+                }
+              }
             }
           }
           path {
             path = "/"
-            # path_type = "Prefix"
+            path_type = "Prefix"
             backend {
-                service_name =  var.frontend_name
-                service_port =  80
-              
+              service {
+                name = var.frontend_name
+                port {
+                    number = 80
+                }
+              }
             }
           }
         }

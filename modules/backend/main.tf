@@ -1,6 +1,6 @@
 resource "kubernetes_secret" "backend" {
     metadata {
-      name = "backend-secrets"
+      name = "backend-secret"
       namespace = var.namespace
       labels =  {
         app = var.backend_name
@@ -10,6 +10,21 @@ resource "kubernetes_secret" "backend" {
     data = {
       "JWT_SECRET_KEY" = "RjhCVlA5ZW9kSEw4blM3enhLOUhESzlpYmV6NUJya2lHbTdrWEJ3UEU1eGdqRml3cEp4eVFTZUx4bklwUGZZWVpHZXFSMVE1T1RCZ2R4UnFUOEtYOUE9PQo"
     } 
+}
+
+
+resource "kubernetes_config_map" "backend_config" {
+  metadata {
+    name      = "backend-config"
+    namespace = var.namespace
+    labels = {
+      app = var.backend_name
+    }
+  }
+
+  data = {
+    DATABASE_URL = var.database_url
+  }
 }
 
 resource "kubernetes_deployment" "backend_deployment" {
@@ -34,26 +49,27 @@ resource "kubernetes_deployment" "backend_deployment" {
           }
         }
         spec {
+          service_account_name = "flask-backend-sa"
           container {
             name = var.backend_name
             image = var.backend_image
             port {
               container_port = var.flask_port
             }
-            readiness_probe {
-              exec {
-                command = [ "sh", "-c", "nc -z postgres 5432" ]
-              }
-              initial_delay_seconds = 15
-              period_seconds = 10
-              timeout_seconds = 5
-              failure_threshold = 3
-            }
+            # readiness_probe {
+            #   exec {
+            #     command = [ "sh", "-c", "nc -z postgres 5432" ]
+            #   }
+            #   initial_delay_seconds = 15
+            #   period_seconds = 10
+            #   timeout_seconds = 5
+            #   failure_threshold = 3
+            # }
             env {
               name = "DATABASE_URL"
               value_from {
                 config_map_key_ref {
-                  name = var.app_config_name
+                  name = kubernetes_config_map.backend_config.metadata[0].name
                   key = "DATABASE_URL"
                 }
               }

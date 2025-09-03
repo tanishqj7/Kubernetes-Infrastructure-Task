@@ -1,5 +1,5 @@
 # Namespace
-namespace = "backend"
+namespace = "myapp"
 
 # Postgres
 postgres_name     = "postgres"
@@ -14,10 +14,12 @@ storage_size      = "1Gi"
 app_config_name = "postgres-config"
 
 # Backend
-backend_name      = "flask-backend"
+backend_name      = "backend"
 backend_image     = "tanishqjaiswal/flask-backend:v10"
 backend_replicas  = 1
 flask_port        = 5000
+# backend_secret_name = "backend-secret"
+database_url = "postgresql://postgres:postgres@postgres:5432/kube"
 
 #frontend
 frontend_name     = "frontend"
